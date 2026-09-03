@@ -1,69 +1,103 @@
-﻿namespace Enum_Practice
+﻿using Enum_Practice.Display;
+using Enum_Practice.Food;
+
+namespace Enum_Practice
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Burger newBurger = new()
+            bool running = true;
+            MenuSwitch currentMenu = MenuSwitch.Main;
+
+            List<Object> currentOrder = new();
+
+            while (running)
             {
-                Bun = Buns.SesameSeedBun,
-                Cheeses = Cheeses.Provolone | Cheeses.American
-            };
+                switch (currentMenu)
+                {
+                    case (MenuSwitch.Main):
+                        switch (DisplayMenuAndGetInput(MenuLibrary.Main))
+                        {
+                            case 0:
+                                Console.Clear();
 
-            Console.WriteLine(newBurger.Bun);
-            Console.WriteLine(newBurger.Cheeses);
+                                Console.WriteLine("Thanks for using my app! :)");
+                                Console.WriteLine("Press any key to exit");
+                                Console.WriteLine();
+                                Console.WriteLine("- SmoothBoiSam");
+
+                                Console.ReadLine();
+
+                                running = false;
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                        }
+                        break;
+                }
+            }
         }
-    }
 
-    public class Burger
-    {
-        public Buns Bun { get; set; }
-        public Cheeses Cheeses { get; set; }
-        public Toppings Toppings { get; set; }
-        public Sauces Sauces { get; set; }
-
-        public void AddCheese(Cheeses newCheese)
+        static int DisplayMenuAndGetInput(Menu menu)
         {
-            Cheeses |= newCheese;
+            bool running = true;
+            bool displayError = false;
+            int returnInt = -1;
+
+            while (running)
+            {
+                Console.Clear();
+
+                if (displayError)
+                {
+                    foreach (string s in menu.Error)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    Console.WriteLine();
+                }
+
+                foreach (string s in menu.Title)
+                {
+                    Console.WriteLine(s);
+                }
+                Console.WriteLine();
+
+                foreach (string s in menu.Prompt)
+                {
+                    Console.WriteLine(s);
+                }
+                Console.WriteLine();
+
+                foreach (string s in menu.Options)
+                {
+                    Console.WriteLine(s);
+                }
+                Console.WriteLine();
+
+                string? input = Console.ReadLine();
+                if (!string.IsNullOrEmpty(input) & int.TryParse(input, out int inputInt))
+                {
+                    if (inputInt < 0 || inputInt >= menu.Options.Length)
+                    {
+                        displayError = true;
+                    }
+                    else
+                    {
+                        returnInt = inputInt;
+                        running = false;
+                    }
+                }
+                else
+                {
+                    displayError = true;
+                }
+            }
+
+            return returnInt;
         }
-    }
-
-    public enum Buns
-    {
-        SesameSeedBun = 1,
-        LettuceWrap = 2,
-        EnglishMuffin = 3
-    }
-
-    [Flags]
-    public enum Cheeses
-    {
-        None = 0,
-        Cheddar = 1,
-        American = 2,
-        Swiss = 4,
-        PepperJack = 8,
-        Provolone = 16
-    }
-
-    [Flags]
-    public enum Toppings
-    {
-        None = 0,
-        Lettuce = 1,
-        Tomato = 2,
-        Onion = 4,
-        Pickles = 8,
-        Jalapenos = 16
-    }
-
-    [Flags]
-    public enum Sauces
-    {
-        None = 0,
-        Ketchup = 1,
-        Mustard = 2,
-        Mayo = 4,
-        BBQ = 8,
     }
 }
