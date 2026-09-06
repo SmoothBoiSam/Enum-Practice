@@ -2,7 +2,7 @@
 {
     public enum Buns
     {
-        SesameSeedBun = 1,
+        SesameSeed = 1,
         LettuceWrap = 2,
         EnglishMuffin = 3
     }

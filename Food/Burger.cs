@@ -6,23 +6,13 @@
         public Cheeses Cheeses { get; set; }
         public Toppings Toppings { get; set; }
         public Sauces Sauces { get; set; }
-        public List<Burger> AllBurgers = new();
 
-        public void AddCheese(Cheeses newCheese)
+        public void DisplayBurger()
         {
-            Cheeses |= newCheese;
-        }
-
-        public void Display()
-        {
-            foreach (Burger b in AllBurgers)
-            {
-                Console.WriteLine(b.Bun);
-                Console.WriteLine(b.Cheeses);
-                Console.WriteLine(b.Toppings);
-                Console.WriteLine(b.Sauces);
-                Console.WriteLine();
-            }
+            Console.WriteLine($"Bun : {Bun}");
+            Console.WriteLine($"Cheeses : {Cheeses}");
+            Console.WriteLine($"Toppings : {Toppings}");
+            Console.WriteLine($"Sauces : {Sauces}");
         }
     }
 }

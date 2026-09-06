@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Enum_Practice.Food
+﻿namespace Enum_Practice.Food
 {
     [Flags]
     public enum Sauces

@@ -2,6 +2,12 @@
 {
     internal enum MenuSwitch
     {
-        Main
+        Main,
+        BurgerBuns,
+        BurgerToppings,
+        BurgerCheeses,
+        BurgerSauces,
+        BurgerConfirm,
+        DisplayBurgers
     }
 }
